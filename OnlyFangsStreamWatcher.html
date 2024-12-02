@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OnlyFangs Streams</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #18181b;
+            color: #f4f4f4;
+            text-align: center;
+            margin: 0;
+        }
+
+        #stream-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 10px;
+            padding: 20px;
+        }
+
+        iframe {
+            width: 100%;
+            height: 300px;
+            border: none;
+        }
+
+        select,
+        button {
+            padding: 10px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>OnlyFangs Stream Viewer</h1>
+    <select id="streamer-select">
+        <option value="anniefuchsia">anniefuchsia</option>
+        <option value="streamer2">Streamer 2</option>
+        <option value="streamer3">Streamer 3</option>
+        <option value="streamer4">Streamer 4</option>
+    </select>
+    <button onclick="addStream()">Add Stream</button>
+    <div id="stream-grid"></div>
+
+    <script>
+        function addStream() {
+            const select = document.getElementById('streamer-select');
+            const streamer = select.value;
+            const grid = document.getElementById('stream-grid');
+
+            // Create iframe for Twitch embed
+            const iframe = document.createElement('iframe');
+            iframe.src = `https://player.twitch.tv/?channel=${streamer}&parent=yourwebsite.github.io`;
+            iframe.allow = "autoplay; fullscreen";
+
+            // Add iframe to the grid
+            grid.appendChild(iframe);
+        }
+    </script>
+</body>
+
+</html>
