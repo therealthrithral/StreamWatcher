@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OnlyFangs Streams</title>
+    <title>Twitch Stream Viewer</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -38,29 +38,44 @@
 </head>
 
 <body>
-    <h1>OnlyFangs Stream Viewer</h1>
-    <select id="streamer-select">
-        <option value="anniefuchsia">anniefuchsia</option>
-        <option value="streamer2">Streamer 2</option>
-        <option value="streamer3">Streamer 3</option>
-        <option value="streamer4">Streamer 4</option>
-    </select>
-    <button onclick="addStream()">Add Stream</button>
+    <h1>Stream Viewer</h1>
+    <div>
+        <input type="text" id="streamer-name" placeholder="Enter Streamer Name">
+        <button onclick="addStream()">Add Stream</button>
+        <button onclick="removeStream()">Remove Stream</button>
+    </div>
     <div id="stream-grid"></div>
 
     <script>
+        // Add a stream to the grid
         function addStream() {
-            const select = document.getElementById('streamer-select');
-            const streamer = select.value;
+            const name = document.getElementById('streamer-name').value.trim().toLowerCase();
+            if (!name) {
+                alert('Please enter a streamer name');
+                return;
+            }
+
             const grid = document.getElementById('stream-grid');
 
             // Create iframe for Twitch embed
             const iframe = document.createElement('iframe');
-            iframe.src = `https://player.twitch.tv/?channel=${streamer}&parent=therealthrithral.github.io`;
+            iframe.src = `https://player.twitch.tv/?channel=${name}&parent=yourwebsite.github.io`;
             iframe.allow = "autoplay; fullscreen";
+            iframe.id = `stream-${name}`;
 
             // Add iframe to the grid
             grid.appendChild(iframe);
+        }
+
+        // Remove a stream from the grid
+        function removeStream() {
+            const name = document.getElementById('streamer-name').value.trim().toLowerCase();
+            const iframe = document.getElementById(`stream-${name}`);
+            if (iframe) {
+                iframe.remove(); // Remove the iframe
+            } else {
+                alert('Stream not found');
+            }
         }
     </script>
 </body>
